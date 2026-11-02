@@ -20,7 +20,7 @@ void _abstract(int *total, Student *student)
    
 }
 
-void _writeIn(int total,Student *result){
+void _writeIn(int total, Student *result){
     FILE *ptr;
     ptr= fopen("student.dat","w");
 
@@ -33,6 +33,6 @@ void _writeIn(int total,Student *result){
 
     fclose(ptr);
 
-    printf("Write In Successful!😄");
+    printf("Write In Successful!😄\n");
     
 }

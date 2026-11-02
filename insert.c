@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<string.h>
 #include"head file/student.h"
+#include"head file/read_write.h"
 
 int insertStudent(Student students[], int *count, Student item) {
     int left = 0;
@@ -42,6 +43,8 @@ int insertStudent(Student students[], int *count, Student item) {
 
     // 学生总人数加一
     (*count)++;
+
+    _writeIn(*count, students);
 
     return 1;
 }
