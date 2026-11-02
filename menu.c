@@ -10,7 +10,7 @@ int main(){
 
     while(1){
 
-    printf("What's your request?\n1. Search Data. \n2. Insert Data.\n3. Delete Data.\n4. Save Data.\n5. Print Data.\n6. Sort Data.\n");
+    printf("What's your request?\n1. Search Data. \n2. Insert Data.\n3. Delete Data.\n4. Print Data.\n5. Sort Data.\n");
     scanf("%d",&req);
 
     Student student[MAX_STUDENTS];
@@ -53,15 +53,12 @@ int main(){
     // Delete Module
     else if(req == 3){}
 
-    // Save Module
-    else if(req==4){}
-
 
     // Print Model
-    else if(req==5)out(total,student);
+    else if(req==4)out(total,student);
 
     // Sort Model
-    else if(req==6){
+    else if(req==5){
         printf("What's your specific request? \n1. Sort by score.\n2. Sort by ID.\n");
         scanf("%d",&req);
         if (req == 1) sortByScore(student, total, result);

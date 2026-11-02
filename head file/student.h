@@ -21,16 +21,12 @@ int deleteStudent(
     int *count,
     const char *id);
 
-
-// Save Module
-
-
-
+    
 // Print Model
 void out(int total, Student stu[]);
 
-// Sort Model
 
+// Sort Model
 void sortByScore(
     const Student students[],
     int count,
