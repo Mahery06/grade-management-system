@@ -5,14 +5,14 @@
 int searchById(Student stu[],int total, int *n,Student result[])
 {
     char key[ID_LENGTH];
-    int low = 0, high = n - 1, mid, found = -1;
+    int low = 0, high = total - 1, mid, found = -1;
     int i, j;
     Student tmp;
 
     /*二分查找前先进行升序排序*/
-    for (i = 0; i < n - 1; i++)
+    for (i = 0; i < total - 1; i++)
     {
-        for (j = 0; j < n - 1 - i; j++)
+        for (j = 0; j < total - 1 - i; j++)
         {
             if (strcmp(stu[j].id, stu[j + 1].id) > 0) 
             {
@@ -60,7 +60,7 @@ int searchByName(Student stu[],int total, int *n,Student result[])
     printf("请输入要查询的姓名：");
     scanf("%s", key);
 
-    for (i = 0; i < n && count < MAX_RESULT; i++) 
+    for (i = 0; i < total && count < MAX_RESULT; i++) 
     {
         if (strcmp(stu[i].name, key) == 0)
         {
@@ -90,7 +90,7 @@ int searchByScore(Student stu[],int total, int *n,Student result[])
     printf("请输入成绩上限 m:");
     scanf("%d", &m);
 
-    for (i = 0; i < n && count < MAX_RESULT; i++) 
+    for (i = 0; i < total && count < MAX_RESULT; i++) 
     {
         if (stu[i].score < m) 
         {
