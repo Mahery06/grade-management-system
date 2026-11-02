@@ -27,7 +27,7 @@ int deleteStudent(
 
 
 // Print Model
-
+void out(int total, Student stu[]);
 
 // Sort Model
 
@@ -36,7 +36,7 @@ void sortByScore(
     int count,
     Student sorted[]);
 
-// Aggregate Model
+
 
 
 

@@ -66,8 +66,6 @@ int searchByName(Student stu[],int total, int *n,Student result[])
         if (strcmp(stu[i].name, key) == 0)
         {
             result[count] = stu[i];       
-            printf("学号：%s  姓名：%s  成绩：%.2f\n",   
-                result[count].id, result[count].name, result[count].score);
             count++;
         }
     }
@@ -96,8 +94,7 @@ int searchByScore(Student stu[],int total, int *n,Student result[])
         if (stu[i].score < m) 
         {
             result[count] = stu[i];                      /* ① 返回给调用者 */
-            printf("学号：%s  姓名：%s  成绩：%.2f\n",   /* ② 函数内打印 */
-                result[count].id, result[count].name, result[count].score);
+            
             count++;
         }
     }

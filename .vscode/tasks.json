@@ -12,6 +12,7 @@
                 "${workspaceFolder}\\insert.c",
                 "${workspaceFolder}\\sort.c",
                 "${workspaceFolder}\\readAndwrite.c",
+                "${workspaceFolder}\\type_out.c",
                 "-o",
                 "${workspaceFolder}\\grade_management.exe"
             ],

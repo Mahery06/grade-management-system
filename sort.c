@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<string.h>
 #include"head file/student.h"
+#include"head file/read_write.h"
 
 void sortByScore(
     const Student students[],
@@ -30,4 +31,5 @@ void sortByScore(
             sorted[best] = temp;
         }
     }
+    _writeIn(count,sorted);
 }
