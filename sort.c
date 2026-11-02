@@ -1,5 +1,6 @@
 #include<stdio.h>
-#include"student.h"
+#include<string.h>
+#include"head file/student.h"
 
 void sortByScore(
     const Student students[],

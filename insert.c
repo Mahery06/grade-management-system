@@ -1,5 +1,5 @@
 #include<stdio.h>
-#include"student.h"
+#include"head file/student.h"
 
 int insertStudent(Student students[], int *count, Student item) {
     int left = 0;

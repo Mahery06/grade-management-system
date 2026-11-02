@@ -1,19 +1,24 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include "read_write.h"
+#include"head file/read_write.h"
 
 
-Student *_abstract(int *total)
+void _abstract(int *total, Student *student)
 {
     int count =0 ;
     Student group[MAX_STUDENTS]={0}; 
 
     FILE *ptr = fopen("student.dat","r");
 
+    if(ptr == NULL){
+        printf("Could not find the file.\n");
+        exit(1);
+    }
+
     *total = fread(group,sizeof(Student),MAX_STUDENTS,ptr);
 
     fclose(ptr);
-    return group;
+    student = group;
 }
 
 void _writeIn(int total,Student *result){
@@ -27,6 +32,8 @@ void _writeIn(int total,Student *result){
 
     for(int i=0;i<total;i++) fwrite(result+i, sizeof(Student), 1, ptr);
 
+    fclose(ptr);
+    
     printf("Write In Successful!😄");
     
 }

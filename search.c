@@ -1,19 +1,8 @@
 #include <stdio.h>
 #include <string.h>
+#include "head file/template.h"
 
-
-#define ID_LENGTH 20
-#define NAME_LENGTH 40
-#define MAX_RESULT 200
-
-typedef struct {
-    char id[ID_LENGTH];   
-    char name[NAME_LENGTH];  
-    double score;           
-} Student;
-
-
-int searchById(Student stu[],int n,Student result[])
+int searchById(Student stu[],int total, int *n,Student result[])
 {
     char key[ID_LENGTH];
     int low = 0, high = n - 1, mid, found = -1;
@@ -51,17 +40,19 @@ int searchById(Student stu[],int n,Student result[])
     if (found != -1)
     {
         result[0] = stu[found];       
-        printf("学号：%s  姓名：%s  成绩：%.2d\n",   
+        printf("学号：%s  姓名：%s  成绩：%.2f\n",   
             result[0].id, result[0].name, result[0].score);
         return found;
     }
+
+    *n=1;
 
     printf("查无此人！学号 %s 不存在。\n", key);   
     return -1;
 }
 
 
-int searchByName(Student stu[],int n,Student result[])
+int searchByName(Student stu[],int total, int *n,Student result[])
 {
     char key[NAME_LENGTH];
     int i, count = 0;
@@ -74,19 +65,24 @@ int searchByName(Student stu[],int n,Student result[])
         if (strcmp(stu[i].name, key) == 0)
         {
             result[count] = stu[i];       
-            printf("学号：%s  姓名：%s  成绩：%.2d\n",   
+            printf("学号：%s  姓名：%s  成绩：%.2f\n",   
                 result[count].id, result[count].name, result[count].score);
             count++;
         }
     }
 
     if (count == 0)
-        printf("查无此人！姓名 %s 不存在。\n", key);
-    return count;
+        {
+            printf("查无此人！姓名 %s 不存在。\n", key);
+            return -1;
+        }
+
+    *n = count;
+    return 1;
 }
 
 
-int searchByScore(Student stu[],int n,Student result[])
+int searchByScore(Student stu[],int total, int *n,Student result[])
 {
     double m;
     int i, count = 0;
@@ -99,13 +95,19 @@ int searchByScore(Student stu[],int n,Student result[])
         if (stu[i].score < m) 
         {
             result[count] = stu[i];                      /* ① 返回给调用者 */
-            printf("学号：%s  姓名：%s  成绩：%.2d\n",   /* ② 函数内打印 */
+            printf("学号：%s  姓名：%s  成绩：%.2f\n",   /* ② 函数内打印 */
                 result[count].id, result[count].name, result[count].score);
             count++;
         }
     }
 
+
     if (count == 0)
-        printf("没有成绩小于 %.2f 的学生。\n", m);
-    return count;
+        {
+            printf("没有成绩小于 %.2f 的学生。\n", m);
+            return -1;
+        }
+    *n = count;
+
+    return 1;
 }

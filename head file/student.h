@@ -1,28 +1,12 @@
-
-#define ID_LENGTH 20
-#define NAME_LENGTH 40
-#define MAX_STUDENTS 200
-
-typedef struct
-{
-    char id[ID_LENGTH];
-    char name[NAME_LENGTH];
-    double score;
-} Student;
+#include"template.h"
 
 
 // Search Module
-int searchById(Student stu[],
-    int n,
-    Student result[]);
+int searchById(Student stu[],int total, int *n,Student result[]);
 
-int searchByName(Student stu[],
-    int n,
-    Student result[]);
+int searchByName(Student stu[],int total, int *n,Student result[]);
 
-int searchByScore(Student stu[],
-    int n,
-    Student result[]);
+int searchByScore(Student stu[],int total, int *n,Student result[]);
 
 // Insert Module
 int insertStudent(
