@@ -42,10 +42,11 @@ int searchById(Student stu[],int total, int *n,Student result[])
         result[0] = stu[found];       
         printf("学号：%s  姓名：%s  成绩：%.2f\n",   
             result[0].id, result[0].name, result[0].score);
+        *n = 1;
         return found;
     }
 
-    *n=1;
+    *n = 0;
 
     printf("查无此人！学号 %s 不存在。\n", key);   
     return -1;
@@ -88,7 +89,7 @@ int searchByScore(Student stu[],int total, int *n,Student result[])
     int i, count = 0;
 
     printf("请输入成绩上限 m:");
-    scanf("%d", &m);
+    scanf("%lf", &m);
 
     for (i = 0; i < total && count < MAX_RESULT; i++) 
     {

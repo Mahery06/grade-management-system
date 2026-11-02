@@ -73,8 +73,9 @@ int main(){
 
 
     printf("Do you want to continue?(Y/N)");
-    scanf("%c",&req);
-    if(req == 'N') break;
+    char cont;
+    scanf(" %c", &cont);
+    if(cont == 'N' || cont == 'n') break;
     }
     printf("Goodbye!✋️");
     return 0;
