@@ -18,7 +18,7 @@ int main(){
     _abstract(&total, student);
     Student result[MAX_STUDENTS];
 
-    if((req == 2 || req == 3 || req == 5 || req == 6) && !canModify()){
+    if((req == 2 || req == 3 || req == 5 || req x == 6) && !canModify()){
         printf("Insufficient permissions: regular users can only query; add and delete operations are available only to administrators.\n");
     }
     // Search Module
