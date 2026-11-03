@@ -19,7 +19,7 @@ int main(){
     Student result[MAX_STUDENTS];
 
     if((req == 2 || req == 3) && !canModify()){
-        printf("权限不足：普通用户只能查询，增删操作仅管理员可用。\n");
+        printf("Insufficient permissions: regular users can only query; add and delete operations are available only to administrators.\n");
     }
     // Search Module
     else if(req == 1){
@@ -60,7 +60,14 @@ int main(){
     }
 
     // Delete Module
-    else if(req == 3){}
+    else if(req == 3){ int ans = deleteStudent(student, &total);
+            if (ans == 1)
+            {
+                printf("Operation Successful!😄\n");
+                _writeIn(total, student);
+            }
+            else
+                printf("Operation Unsuccessful!😭\n");}
 
 
     // Print Module
@@ -71,16 +78,22 @@ int main(){
         printf("What's your specific request? \n1. Sort by score.\n2. Sort by ID.\n");
         scanf("%d",&req);
         if (req == 1) sortByScore(student, total, result);
-
-    }
-
-
-
+        else if (req == 2)
+                sortById(student, total, result);
+        else
+            {
+                printf("Invalid option.\n");
+                continue;
+            }
+            out(total, result);
+        }
+        
     printf("Do you want to continue?(Y/N)");
     char cont;
     scanf(" %c", &cont);
     if(cont == 'N' || cont == 'n') break;
     }
+
     printf("Goodbye!✋️");
     return 0;
 
