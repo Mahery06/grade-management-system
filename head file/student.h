@@ -25,16 +25,20 @@ int deleteStudent(
 // Print Model
 void out(int total, Student stu[]);
 
-// Sort Model
+// Sort Module
 void sortByScore(
     const Student students[],
     int count,
     Student sorted[]);
 
-// Sort ID
 void sortById(
     const Student students[],
     int count,
     Student sorted[]);
 
+//  Aggregate Module
+void  aggregate(
+    int total, 
+    Student std[]
+);
 #endif

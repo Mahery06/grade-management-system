@@ -11,14 +11,14 @@ int main(){
 
     while(1){
 
-    printf("What's your request?\n1. Search Data. \n2. Insert Data.\n3. Delete Data.\n4. Print Data.\n5. Sort Data.\n");
+    printf("What's your request?\n1. Search Data. \n2. Insert Data.\n3. Delete Data.\n4. Print Data.\n5. Sort Data.\n6. Aggregate Model.\n");
     scanf("%d",&req);
 
     Student student[MAX_STUDENTS];
     _abstract(&total, student);
     Student result[MAX_STUDENTS];
 
-    if((req == 2 || req == 3) && !canModify()){
+    if((req == 2 || req == 3 || req == 5 || req == 6) && !canModify()){
         printf("Insufficient permissions: regular users can only query; add and delete operations are available only to administrators.\n");
     }
     // Search Module
@@ -38,7 +38,7 @@ int main(){
             printf("Operation Successful!😄\n\n");
             printf("The searched content shows below:\n");
             for(int i=0;i<n;i++)
-                printf("(ID:%s Name:%s Score:%.2f)\n", result[i].id, result[i].name,result[i].score);
+                printf("(ID:%s Name:%s Score:%.2f)\n", result[i].id, result[i].name, result[i].score);
 
             printf("Do you need pieces of AI tailored report?(Y/N)");
             char wantReport;
@@ -87,7 +87,11 @@ int main(){
             }
             out(total, result);
         }
-        
+
+    // Aggregate Module
+    else if (req == 6) aggregate(total, student);
+
+
     printf("Do you want to continue?(Y/N)");
     char cont;
     scanf(" %c", &cont);
@@ -98,7 +102,3 @@ int main(){
     return 0;
 
 }
-
-
-
-

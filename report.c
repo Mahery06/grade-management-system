@@ -5,7 +5,7 @@
 #include"head file/student.h"
 
 // 用于接收返回数据的回调函数
-static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp) {
+static size_t WriteCallback(void *contents, size_t size, size_t nmemb) {
     size_t realsize = size * nmemb;
     printf("%.*s", (int)realsize, (char*)contents); // 直接打印返回内容
     return realsize;
@@ -37,7 +37,7 @@ void tailored_report(Student stu[],int n){
     char w[300]="Authorization: Bearer ";
     char *key=getenv("api_key");
     if(key == NULL){
-        printf("环境变量 api_key 未设置，无法生成报告。\n");
+        printf("The environment variable api_key is not set, so the report cannot be generated.\n");
         curl_easy_cleanup(curl);
         return;
     }
