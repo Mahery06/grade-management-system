@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "head file/template.h"
 
-int type()
+int main()
 {
 
     FILE *ptr;
