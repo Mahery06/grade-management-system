@@ -1,12 +1,13 @@
-#include"template.h"
-
+#ifndef STUDENT_H
+#define STUDENT_H
+#include "template.h"
 
 // Search Module
-int searchById(Student stu[],int total, int *n,Student result[]);
+int searchById(Student stu[], int total, int *n, Student result[]);
 
-int searchByName(Student stu[],int total, int *n,Student result[]);
+int searchByName(Student stu[], int total, int *n, Student result[]);
 
-int searchByScore(Student stu[],int total, int *n,Student result[]);
+int searchByScore(Student stu[], int total, int *n, Student result[]);
 
 void tailored_report(Student stu[],int n);
 
@@ -16,17 +17,13 @@ int insertStudent(
     int *count,
     Student item);
 
-
 // Delete Module
 int deleteStudent(
     Student students[],
-    int *count,
-    const char *id);
+    int *count);
 
-    
 // Print Model
 void out(int total, Student stu[]);
-
 
 // Sort Model
 void sortByScore(
@@ -34,8 +31,10 @@ void sortByScore(
     int count,
     Student sorted[]);
 
+// Sort ID
+void sortById(
+    const Student students[],
+    int count,
+    Student sorted[]);
 
-
-
-
-
+#endif
