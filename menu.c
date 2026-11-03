@@ -12,7 +12,26 @@ int main()
     while (1)
     {
 
+<<<<<<< HEAD
         printf("What's your request?\n1. Search Data. \n2. Insert Data.\n3. Delete Data.\n4. Print Data.\n5. Sort Data.\n6. Aggregate Model.\n");
+=======
+    printf("What's your request?\n1. Search Data. \n2. Insert Data.\n3. Delete Data.\n4. Print Data.\n5. Sort Data.\n6. Aggregate Model.\n");
+    scanf("%d",&req);
+
+    Student student[MAX_STUDENTS];
+    _abstract(&total, student);
+    Student result[MAX_STUDENTS];
+
+    if((req == 2 || req == 3 || req == 5 || req x == 6) && !canModify()){
+        printf("Insufficient permissions: regular users can only query; add and delete operations are available only to administrators.\n");
+    }
+    // Search Module
+    else if(req == 1){
+        int ans;
+
+        int n=0;
+        printf("What's your specific request?\n1. Search by ID.\n2. Search by Name.\n3. Search by Score.\n");
+>>>>>>> 6549391326e1434ac3e9a49b459ae9f99348b6c2
         scanf("%d", &req);
 
         Student student[MAX_STUDENTS];
