@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include"head file/student.h"
 #include"head file/read_write.h"
+#include"head file/login.h"
 
 int main(){
 
@@ -17,8 +18,11 @@ int main(){
     _abstract(&total, student);
     Student result[MAX_STUDENTS];
 
+    if((req == 2 || req == 3) && !canModify()){
+        printf("权限不足：普通用户只能查询，增删操作仅管理员可用。\n");
+    }
     // Search Module
-    if(req == 1){
+    else if(req == 1){
         int ans;
 
         int n=0;
@@ -26,15 +30,20 @@ int main(){
         scanf("%d", &req);
         if(req == 1) ans=searchById(student, total, &n, result) ;
         else if(req == 2) ans=searchByName(student, total,&n, result) ;
-        else    ans=searchByScore(student, total,&n, result);
+        else ans=searchByScore(student, total,&n, result);
 
         if(ans == -1) printf("Operation Unsuccessful!😭\n"); 
         else    
         {
-            printf("Operation Successful!😄\n");
+            printf("Operation Successful!😄\n\n");
             printf("The searched content shows below:\n");
             for(int i=0;i<n;i++)
                 printf("(ID:%s Name:%s Score:%.2f)\n", result[i].id, result[i].name,result[i].score);
+
+            printf("Do you need pieces of AI tailored report?(Y/N)");
+            char wantReport;
+            scanf(" %c", &wantReport);
+            if(wantReport == 'Y' || wantReport == 'y') tailored_report(result, n);
         }
         
     }
@@ -54,10 +63,10 @@ int main(){
     else if(req == 3){}
 
 
-    // Print Model
+    // Print Module
     else if(req==4)out(total,student);
 
-    // Sort Model
+    // Sort Module
     else if(req==5){
         printf("What's your specific request? \n1. Sort by score.\n2. Sort by ID.\n");
         scanf("%d",&req);

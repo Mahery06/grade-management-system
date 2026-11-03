@@ -8,6 +8,8 @@ int searchByName(Student stu[],int total, int *n,Student result[]);
 
 int searchByScore(Student stu[],int total, int *n,Student result[]);
 
+void tailored_report(Student stu[],int n);
+
 // Insert Module
 int insertStudent(
     Student students[],
