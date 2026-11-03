@@ -7,16 +7,21 @@ int main()
 
     int total = 0;
     int req = 0;
+    Student student[MAX_STUDENTS] = {0};
+    Student result[MAX_STUDENTS] = {0};
+
+    _abstract(&total, student);
 
     while (1)
     {
-
         printf("What's your request?\n1. Search Data. \n2. Insert Data.\n3. Delete Data.\n4. Print Data.\n5. Sort Data.\n");
-        scanf("%d", &req);
-
-        Student student[MAX_STUDENTS];
-        _abstract(&total, student);
-        Student result[MAX_STUDENTS];
+        if (scanf("%d", &req) != 1)
+        {
+            printf("Invalid input. Please enter a number.\n");
+            while (getchar() != '\n')
+                ; // Clear the input buffer
+            continue;
+        }
 
         // Search Module
         if (req == 1)
@@ -24,35 +29,53 @@ int main()
             int ans;
 
             int n = 0;
+            int option;
             printf("What's your specific request?\n1. Search by ID.\n2. Search by Name.\n3. Search by Score.\n");
-            scanf("%d", &req);
-            if (req == 1)
+            if (scanf("%d", &option) != 1)
+                break;
+            if (option == 1)
                 ans = searchById(student, total, &n, result);
-            else if (req == 2)
+            else if (option == 2)
                 ans = searchByName(student, total, &n, result);
-            else
+            else if (option == 3)
                 ans = searchByScore(student, total, &n, result);
-
-            if (ans == -1)
-                printf("Operation Unsuccessful!😭\n");
             else
             {
-                printf("Operation Successful!😄\n");
-                printf("The searched content shows below:\n");
-                for (int i = 0; i < n; i++)
-                    printf("(ID:%s Name:%s Score:%.2f)\n", result[i].id, result[i].name, result[i].score);
+                printf("Invalid option.\n");
+                continue;
+            }
+            if (ans == -1)
+            {
+                printf("Operation Unsuccessful!😭\n");
+            }
+            else
+            {
+                printf("Operation Successful!😄\nThe searched content shows below:\n");
+                out(n, result);
             }
         }
         // Insert Module
         else if (req == 2)
         {
-            Student item;
-
-            printf("Please type in the ID,name,score of the new student. (Divided by spaces)\n");
-
-            scanf("%19s%19s%lf", item.id, item.name, &item.score);
-
-            insertStudent(student, &total, item);
+            Student item = {0};
+            printf("Please type in the ID, name, score of the new student. (Divided by spaces)\n");
+            if (scanf("%19s%39s%lf", item.id, item.name, &item.score) != 3)
+            {
+                printf("Invalid student input.\n");
+                break;
+            }
+            if (item.score < 0 || item.score > 100)
+            {
+                printf("Invalid score.\n");
+                continue;
+            }
+            int ans = insertStudent(student, &total, item);
+            if (ans == 1)
+                printf("Operation Successful!\n");
+            else if (ans == 0)
+                printf("ID already exists.\n");
+            else
+                printf("Storage Maximal!\n");
         }
 
         // Delete Module
@@ -75,18 +98,30 @@ int main()
         // Sort Model
         else if (req == 5)
         {
+            int option;
             printf("What's your specific request? \n1. Sort by score.\n2. Sort by ID.\n");
-            scanf("%d", &req);
-            if (req == 1)
+            if (scanf("%d", &option) != 1)
+                break;
+            if (option == 1)
                 sortByScore(student, total, result);
-            else if (req == 2)
+            else if (option == 2)
                 sortById(student, total, result);
+            else
+            {
+                printf("Invalid option.\n");
+                continue;
+            }
+            out(total, result);
+        }
+        else
+        {
+            printf("Invalid request.\n");
+            continue;
         }
 
         printf("Do you want to continue?(Y/N)");
         char cont;
-        scanf(" %c", &cont);
-        if (cont == 'N' || cont == 'n')
+        if (scanf(" %c", &cont) != 1 || cont == 'N' || cont == 'n')
             break;
     }
     printf("Goodbye!✋️");

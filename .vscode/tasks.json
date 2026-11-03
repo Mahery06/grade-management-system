@@ -1,32 +1,29 @@
 {
     "tasks": [
-        {
+           {
             "type": "cppbuild",
             "label": "C/C++: gcc.exe 编译整个项目",
             "command": "D:\\MinGW\\mingw64\\bin\\gcc.exe",
             "args": [
                 "-fdiagnostics-color=always",
+                "-std=c11",
+                "-Wall",
+                "-Wextra",
                 "-g",
                 "${workspaceFolder}\\menu.c",
                 "${workspaceFolder}\\search.c",
                 "${workspaceFolder}\\insert.c",
+                "${workspaceFolder}\\delete.c",
                 "${workspaceFolder}\\sort.c",
-                "${workspaceFolder}\\readAndwrite.c",
+                "${workspaceFolder}\\sortById.c",
+                "${workspaceFolder}\\readAndWrite.c",
                 "${workspaceFolder}\\type_out.c",
                 "-o",
                 "${workspaceFolder}\\grade_management.exe"
             ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "detail": "编译主程序（menu/search/insert/sort/readAndwrite 一起链接）。create_data.c 单独编译用于生成 student.dat。"
+            "options": { "cwd": "${workspaceFolder}" },
+            "problemMatcher": ["$gcc"],
+            "group": { "kind": "build", "isDefault": true }
         }
     ],
     "version": "2.0.0"

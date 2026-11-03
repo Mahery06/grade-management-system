@@ -7,7 +7,7 @@ void sortById(
     int count,
     Student sorted[])
 {
-    memcpy(sorted, students, count * sizeof(Student));
+    memcpy(sorted, students, (size_t)count * sizeof(Student));
     for (int i = 0; i < count - 1; i++)
     {
         int best = i;
@@ -27,5 +27,4 @@ void sortById(
             sorted[best] = temp;
         }
     }
-    _writeIn(count, sorted);
 }

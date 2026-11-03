@@ -1,3 +1,5 @@
+#ifndef STUDENT_H
+#define STUDENT_H
 #include "template.h"
 
 // Search Module
@@ -32,3 +34,5 @@ void sortById(
     const Student students[],
     int count,
     Student sorted[]);
+
+#endif
