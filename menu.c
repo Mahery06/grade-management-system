@@ -11,7 +11,7 @@ int main(){
 
     while(1){
     printf("========== Welcome to grade management system!! ==========\n ");
-    printf("What's your request?\n1. Search Data. \n2. Insert Data.\n3. Delete Data.\n4. Print Data.\n5. Sort Data.\n6. Aggregate Data.\n");
+    printf("What's your request?\n1. Search Data. \n2. Insert Data.\n3. Delete Data.\n4. Print Data.\n5. Sort Data.\n6. Aggregate Data.\n7. Modify Data.\n");
     printf("Input:");
     scanf("%d",&req);
 
@@ -92,9 +92,14 @@ int main(){
 
     // Aggregate Module
     else if (req == 6) aggregate(total, student);
-
-
-    printf("Do you want to continue?(Y/N):");
+    
+    else if (req == 7) {
+        
+        int ans = modify(total, student);
+        if (ans) printf("修改成功！\n");
+        else printf("修改失败~\n");
+    }
+    printf("您需要继续操作吗？(Y/N):");
     char cont;
     scanf(" %c", &cont);
     if(cont == 'N' || cont == 'n') break;

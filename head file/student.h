@@ -41,4 +41,10 @@ void  aggregate(
     int total, 
     Student std[]
 );
+
+
+// Modify Module
+int modify(
+    int total, 
+    Student stu[]);
 #endif
