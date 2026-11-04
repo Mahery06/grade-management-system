@@ -17,7 +17,7 @@ int modify(int total, Student stu[]){
             printf("请输入最新的分数: ");
             scanf("%f", &score);
             stu[i].score = score;
-            _writeIn(1, stu);
+            _writeIn(total, stu);
             return 1;
         }
     }

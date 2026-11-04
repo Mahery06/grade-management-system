@@ -9,11 +9,7 @@ void _abstract(int *total, Student *student)
 
     if (ptr == NULL)
     {
-<<<<<<< HEAD
         printf("找不到文件。\n");
-=======
-        printf("无法找到文件。\n");
->>>>>>> 8f08cc56d650f198db8e6cf493b78ca15ed29f92
         exit(1);
     }
 
@@ -45,9 +41,5 @@ void _writeIn(int total, Student *result)
         printf("写入文件失败。\n");
         exit(1);
     }
-<<<<<<< HEAD
     printf("写入成功！😄\n");
-=======
-    printf("写入成功!😄\n");
->>>>>>> 8f08cc56d650f198db8e6cf493b78ca15ed29f92
 }
