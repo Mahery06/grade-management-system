@@ -1,13 +1,13 @@
-#include<stdio.h>
-#include"head file/student.h"
-#include"head file/read_write.h"
-#include"head file/login.h"
+#include <stdio.h>
+#include "head file/student.h"
+#include "head file/read_write.h"
+#include "head file/login.h"
 
-int main(){
+int main()
+{
 
-    int total=0;
+    int total = 0;
     int req = 0;
-    
 
     while(1){
     printf("========== 欢迎使用成绩管理系统！！ ==========\n ");
@@ -34,13 +34,11 @@ int main(){
         printf("请输入：");
         scanf("%s%s%lf", item.id, item.name, &item.score);
 
-        insertStudent(student, &total, item);
-    
-    }
+            Student student[MAX_STUDENTS];
+            _abstract(&total, student);
+            Student result[MAX_STUDENTS];
 
-    // Delete Module
-    else if(req == 3){ int ans = deleteStudent(student, &total);
-            if (ans == 1)
+            if ((req == 2 || req == 3 || req == 5 || req == 6) && !canModify())
             {
                 printf("操作成功！😄\n");
                 _writeIn(total, student);
@@ -65,7 +63,25 @@ int main(){
                 printf("无效选项。\n");
                 continue;
             }
-            out(total, result);
+
+            // Aggregate Module
+            else if (req == 6)
+                aggregate(total, student);
+
+            else if (req == 7)
+            {
+
+                int ans = modify(total, student);
+                if (ans)
+                    printf("修改成功！\n");
+                else
+                    printf("修改失败~\n");
+            }
+            printf("您需要继续操作吗？(Y/N):");
+            char cont;
+            scanf(" %c", &cont);
+            if (cont == 'N' || cont == 'n')
+                break;
         }
 
     // Aggregate Module

@@ -1,11 +1,11 @@
 {
+    "version": "2.0.0",
     "tasks": [
-           {
-            "type": "cppbuild",
+        {
+            "type": "process",
             "label": "C/C++: gcc.exe 编译整个项目",
             "command": "D:\\mingw64\\bin\\gcc.exe",
             "args": [
-                "-fdiagnostics-color=always",
                 "-std=c11",
                 "-Wall",
                 "-Wextra",
@@ -15,6 +15,7 @@
                 "${workspaceFolder}\\insert.c",
                 "${workspaceFolder}\\delete.c",
                 "${workspaceFolder}\\sort.c",
+                "${workspaceFolder}\\sortById.c",
                 "${workspaceFolder}\\readAndwrite.c",
                 "${workspaceFolder}\\type_out.c",
                 "${workspaceFolder}\\report.c",
@@ -26,10 +27,39 @@
                 "-o",
                 "${workspaceFolder}\\menu.exe"
             ],
-            "options": { "cwd": "${workspaceFolder}" },
-            "problemMatcher": ["$gcc"],
-            "group": { "kind": "build", "isDefault": true }
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: gcc.exe 生成活动文件",
+            "command": "D:\\mingw64\\bin\\gcc.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "调试器生成的任务。"
         }
-    ],
-    "version": "2.0.0"
+    ]
 }

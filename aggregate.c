@@ -1,17 +1,21 @@
-#include<stdio.h>
-#include"head file/student.h"
+#include <stdio.h>
+#include "head file/student.h"
 
-void aggregate(int total, Student std[]){
-    int count = 0; 
+void aggregate(int total, Student std[])
+{
+    int count = 0;
     float min = 101, max = 0, sum = 0;
-    for(int i=0; i<total; i++){
+    for (int i = 0; i < total; i++)
+    {
         sum += std[i].score;
 
-        if(std[i].score < min) min = std[i].score;
-        if(std[i].score > max) max = std[i].score;
+        if (std[i].score < min)
+            min = std[i].score;
+        if (std[i].score > max)
+            max = std[i].score;
     }
 
-    float ave = sum/total; 
+    float ave = sum / total;
 
     printf("\n最高分是 %.2f\n", max);
     printf("最低分是 %.2f\n",  min);
@@ -23,4 +27,5 @@ void aggregate(int total, Student std[]){
     printf("分数在 60.00 分以上的学生比例为 %.2f%%。\n", (float)count/total*100);
     
 
+    printf("及格率为 %.2f%% 。\n", (float)count / total * 100);
 }

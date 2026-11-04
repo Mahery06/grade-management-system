@@ -6,32 +6,28 @@
 #include <string.h>
 #include <windows.h>
 
-
 #define ADMIN_NAME "admin"
 #define ADMIN_PASS "123456"
-#define USER_NAME  "user"
-#define USER_PASS  "123456"
+#define USER_NAME "user"
+#define USER_PASS "123456"
 
-#define ROLE_FAIL  0
-#define ROLE_USER  1
+#define ROLE_FAIL 0
+#define ROLE_USER 1
 #define ROLE_ADMIN 2
 
 static int g_role = ROLE_FAIL;
 
-__attribute__((unused))
-static const char *roleName(int role)
+__attribute__((unused)) static const char *roleName(int role)
 {
     if (role == ROLE_ADMIN) return "管理员";
     if (role == ROLE_USER)  return "普通用户";
     return "未登录";
 }
 
-
 static int canModify(void)
 {
     return g_role == ROLE_ADMIN;
 }
-
 
 static int login(void)
 {
