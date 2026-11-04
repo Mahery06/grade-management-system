@@ -3,6 +3,7 @@
 #include "head file/student.h"
 #include "head file/read_write.h"
 
+// sortByScore按照成绩降序排列
 void sortByScore(
     const Student students[],
     int count,
@@ -37,12 +38,13 @@ void sortByScore(
     }
 }
 
+// soerById按照Id升序排列
 void sortById(
     const Student students[],
     int count,
     Student sorted[])
 {
-    memcpy(sorted, students, (size_t)count * sizeof(Student));
+    memcpy(sorted, students, count * sizeof(Student));
     for (int i = 0; i < count - 1; i++)
     {
         int best = i;
