@@ -44,7 +44,7 @@ static int login(void)
         printf("UserName: ");
         if (scanf("%31s", name) != 1) return ROLE_FAIL;
 
-        printf("PW: ");
+        printf("PassWord: ");
         if (scanf("%31s", pass) != 1) return ROLE_FAIL;
 
         if (strcmp(name, ADMIN_NAME) == 0 && strcmp(pass, ADMIN_PASS) == 0) {
