@@ -8,7 +8,7 @@
 static size_t WriteCallback(char *contents, size_t size, size_t nmemb, void *userdata) {
     (void)userdata;
     size_t realsize = size * nmemb;
-    printf("%.*s", (int)realsize, contents); // 直接打印返回内容
+    printf("%.*s\n", (int)realsize, contents); // 直接打印返回内容
     return realsize;
 }
 
