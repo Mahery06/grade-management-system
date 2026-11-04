@@ -20,7 +20,7 @@
                 "${workspaceFolder}\\type_out.c",
                 "${workspaceFolder}\\report.c",
                 "${workspaceFolder}\\aggregate.c",
-      
+                "${workspaceFolder}\\modify.c",
                 "-I",
                 "D:\\curl-8.23.0_8-win64-mingw\\include",
                 "-L",
