@@ -24,5 +24,5 @@ void aggregate(int total, Student std[])
     for(int i=0; i<total; i++)
         if (std[i].score >= 60) count++;
 
-    printf("及格率为 %.2f%% 。\n", (float)count / total * 100);
+    printf("及格率为 %.2f%% \n", (float)count / total * 100);
 }
