@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<string.h>
 #include"head file/student.h"
+#include"head file/read_write.h"
 
 int modify(int total, Student stu[]){
     float score;
@@ -15,6 +16,8 @@ int modify(int total, Student stu[]){
         if(! strcmp(id, stu[i].id)){
             printf("请输入最新的分数: ");
             scanf("%f", &score);
+            stu[i].score = score;
+            _writeIn(1, stu);
             return 1;
         }
     }

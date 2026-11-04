@@ -9,14 +9,14 @@ void _abstract(int *total, Student *student)
 
     if (ptr == NULL)
     {
-        printf("Could not find the file.\n");
+        printf("找不到文件。\n");
         exit(1);
     }
 
     *total = (int)fread(student, sizeof(Student), MAX_STUDENTS, ptr);
     if (ferror(ptr))
     {
-        printf("Read file failed.\n");
+        printf("读取文件失败。\n");
         fclose(ptr);
         exit(1);
     }
@@ -31,15 +31,15 @@ void _writeIn(int total, Student *result)
 
     if (ptr == NULL)
     {
-        printf("Could not open the file for writing.\n");
+        printf("无法打开文件进行写入。\n");
         exit(1);
     }
     size_t written = fwrite(result, sizeof(Student), (size_t)total, ptr);
     int closed = fclose(ptr);
     if (written != (size_t)total || closed != 0)
     {
-        printf("Write file failed.\n");
+        printf("写入文件失败。\n");
         exit(1);
     }
-    printf("Write In Successful!😄\n");
+    printf("写入成功！😄\n");
 }

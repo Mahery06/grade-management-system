@@ -20,13 +20,11 @@
                 "${workspaceFolder}\\report.c",
                 "${workspaceFolder}\\aggregate.c",
                 "${workspaceFolder}\\modify.c",
+                "${workspaceFolder}\\warning.c",
                 "-I",
-                "D:\\curl-8.23.0_8-win64-mingw\\include",
-                "-L",
-                "D:\\curl-8.23.0_8-win64-mingw\\lib",
-                "-lcurl",
+                "${workspaceFolder}\\head file",
                 "-o",
-                "${workspaceFolder}\\grade_management.exe"
+                "${workspaceFolder}\\menu.exe"
             ],
             "options": { "cwd": "${workspaceFolder}" },
             "problemMatcher": ["$gcc"],

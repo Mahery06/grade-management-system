@@ -13,14 +13,14 @@ void aggregate(int total, Student std[]){
 
     float ave = sum/total; 
 
-    printf("\nThe highest score is %.2f\n", max);
-    printf("The lowest score is %.2f\n",  min);
-    printf("The average score is %.2f\n", ave);
+    printf("\n最高分是 %.2f\n", max);
+    printf("最低分是 %.2f\n",  min);
+    printf("平均分是 %.2f\n", ave);
 
     for(int i=0; i<total; i++)
         if (std[i].score >= 60) count++;
 
-    printf("The ratio of students who acquire score higher than 60.00 is %.2f%%.\n", (float)count/total*100);
+    printf("分数在 60.00 分以上的学生比例为 %.2f%%。\n", (float)count/total*100);
     
 
 }

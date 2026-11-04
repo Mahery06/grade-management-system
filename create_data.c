@@ -9,7 +9,7 @@ int main()
     ptr = fopen("student.dat", "wb");
     if (ptr == NULL)
     {
-        printf("Could not find the file.\n");
+        printf("找不到文件。\n");
         return 1;
     }
     Student group[] ={

@@ -3,13 +3,13 @@
 #include "template.h"
 
 // Search Module
-int searchById(Student stu[], int total, int *n, Student result[]);
+int searchById(Student stu[],int total, int *n,Student result[]);
 
-int searchByName(Student stu[], int total, int *n, Student result[]);
 
-int searchByScore(Student stu[], int total, int *n, Student result[]);
+// 多条件查询流程（学号 / 姓名 / 分数，可选区间）
+void searchMenu(int total, Student stu[]);
 
-void tailored_report(Student stu[],int n);
+
 
 // Insert Module
 int insertStudent(
@@ -47,4 +47,13 @@ void  aggregate(
 int modify(
     int total, 
     Student stu[]);
+
+// 学业预警模块
+void warningMenu(const Student students[], int count);
+
+// 学业规划报告
+void tailored_report(int total, Student stu[]);
+
 #endif
+
+

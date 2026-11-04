@@ -1,65 +1,36 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <curl/curl.h>
 #include "head file/student.h"
 
-// 用于接收返回数据的回调函数
-static size_t WriteCallback(char *contents, size_t size, size_t nmemb, void *userdata) {
-    (void)userdata;
-    size_t realsize = size * nmemb;
-    printf("%.*s\n", (int)realsize, contents); // 直接打印返回内容
-    return realsize;
-}
+void tailored_report(int total, Student stu[]) {
 
-void tailored_report(Student stu[], int n) {
-    char p[1500] = "";
+    printf("同学，你好。你的学号是：");
+    char id[10]={0};
+    scanf("%s", id);
+    char path[40]={0};
+    char cont[1000]={0};
+    char name[10]={0};
+    strcpy(path, "report_resource/report");
+    for(int i=0; i<total; i++){
+        if(! strcmp(id, stu[i].id)){
+        strcpy(name,stu[i].name);
+        if(stu[i].score<60) strcat(path, "0-60.txt");
+        else if(stu[i].score>=60 && stu[i].score<70) strcat(path, "60-70.txt");
+        else if(stu[i].score>=70 && stu[i].score<75) strcat(path, "70-75.txt");
+        else if(stu[i].score>=75 && stu[i].score<80) strcat(path, "75-80.txt");
+        else if(stu[i].score>=80 && stu[i].score<85) strcat(path, "80-85.txt");
+        else if(stu[i].score>=85 && stu[i].score<90) strcat(path, "85-90.txt");
+        else if(stu[i].score>=90 && stu[i].score<95) strcat(path, "90-95.txt");
+        else if(stu[i].score>=95 && stu[i].score<100) strcat(path, "95-100.txt");
+        break;
 
-    for (int i = 0; i < n; i++) {
-        snprintf(p + strlen(p), sizeof(p) - strlen(p), "%s %g\\n", stu[i].name, stu[i].score);
+        }
     }
-
-    CURL *curl;
-    CURLcode resp;
-    struct curl_slist *headers = NULL;
-
-    curl = curl_easy_init();
-    if (curl == NULL) {
-        printf("curl init failed!\n");
-        return;
-    }
-
-    curl_easy_setopt(curl, CURLOPT_URL, "https://api.deepseek.com/chat/completions");
-
-    // 2. 设置请求头
-    headers = curl_slist_append(headers, "Content-Type: application/json");
-    char w[300] = "Authorization: Bearer ";
-    char *key = getenv("api_key");
-    if (key == NULL) {
-        printf("The environment variable api_key is not set, so the report cannot be generated.\n");
-        curl_easy_cleanup(curl);
-        return;
-    }
-    strncat(w, key, sizeof(w) - strlen(w) - 1);
-    headers = curl_slist_append(headers, w);
-    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-
-    // 3. 设置 POST 请求体（JSON 数据）
-    char mes[1700] = "{\"model\": \"deepseek-flash\", \"messages\": [{\"role\": \"user\", \"content\": \"帮我按照每一位同学对应的高三数学分数(在对应后方,满分100),给每一个同学指定规划。结构为:学生姓名,具体规划内容。";
-    char *rear = strcat(p, "\"}]}");
-    const char *json_payload = strcat(mes, rear);
-    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json_payload);
-
-    // 4. 设置接收响应的回调函数
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-
-    // 执行请求
-    resp = curl_easy_perform(curl);
-    if (resp != CURLE_OK) {
-        fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(resp));
-    }
-
-    // 清理资源
-    curl_slist_free_all(headers);
-    curl_easy_cleanup(curl);
+    FILE* ptr;
+    ptr = fopen(path, "r");
+    fread(cont,1, 1000, ptr);
+    fclose(ptr);
+    printf("%s 同学,你的学业规划报告如下：\n",name);
+    printf("%s\n", cont);
 }
