@@ -9,17 +9,28 @@ int main()
     int total = 0;
     int req = 0;
 
-<<<<<<< HEAD
     while (1)
     {
+        printf("========== 欢迎使用学生成绩管理系统！！ ==========\n ");
+        printf("请选择您需要的操作：\n1. 查询学生信息 \n2. 插入学生信息\n3.删除学生信息\n4. 显示全部学生信息\n5. 学生信息排序\n6.学生成绩统计\n");
+        printf("请输入选项(1-6):");
+        scanf("%d", &req);
 
-        printf("What's your request?\n1. Search Data. \n2. Insert Data.\n3. Delete Data.\n4. Print Data.\n5. Sort Data.\n6. Aggregate Model.\n");
-        == == == =
-                     while (1)
+        Student student[MAX_STUDENTS];
+        _abstract(&total, student);
+        Student result[MAX_STUDENTS];
+
+        if ((req == 2 || req == 3 || req == 5 || req == 6) && !canModify())
         {
-            printf("========== Welcome to grade management system!! ==========\n ");
-            printf("What's your request?\n1. Search Data. \n2. Insert Data.\n3. Delete Data.\n4. Print Data.\n5. Sort Data.\n6. Aggregate Data.\n");
-            printf("Input:");
+            printf("权限不足：普通用户只能查询；添加和删除操作仅对管理员开放。\n");
+        }
+        // Search Module
+        else if (req == 1)
+        {
+            int ans;
+
+            int n = 0;
+            printf("请选择您的具体请求：\n1. 按ID查询.\n2. 按姓名查询.\n3. 按成绩查询.\n");
             scanf("%d", &req);
 
             Student student[MAX_STUDENTS];
@@ -28,16 +39,26 @@ int main()
 
             if ((req == 2 || req == 3 || req == 5 || req == 6) && !canModify())
             {
-                printf("Insufficient permissions: regular users can only query; add and delete operations are available only to administrators.\n");
+                printf("操作成功!😄\n\n");
+                printf("查询结果如下:\n");
+                for (int i = 0; i < n; i++)
+                    printf("(ID:%s 姓名:%s 成绩:%.2f)\n", result[i].id, result[i].name, result[i].score);
+
+                printf("是否需要AI定制报告?(Y/N):");
+                char wantReport;
+                scanf(" %c", &wantReport);
+                if (wantReport == 'Y' || wantReport == 'y')
+                    tailored_report(result, n);
             }
             // Search Module
             else if (req == 1)
             {
                 int ans;
 
-                int n = 0;
-                printf("What's your specific request?\n1. Search by ID.\n2. Search by Name.\n3. Search by Score.\n");
->>>>>>> 424ddc55647653c56455fb5d24d70e111e671666
+                printf("请输入新学生的ID、姓名和成绩(用空格分隔):\n");
+                printf("请输入:");
+                scanf("%s%s%lf", item.id, item.name, &item.score);
+
                 scanf("%d", &req);
 
                 Student student[MAX_STUDENTS];
@@ -46,50 +67,79 @@ int main()
 
                 if ((req == 2 || req == 3 || req == 5 || req == 6) && !canModify())
                 {
-<<<<<<< HEAD
-                    printf("Insufficient permissions: regular users can only query; add and delete operations are available only to administrators.\n");
-                    == == == =
-                                 printf("Operation Successful!😄\n\n");
-                    printf("The searched content shows below:\n");
-                    for (int i = 0; i < n; i++)
-                        printf("(ID:%s Name:%s Score:%.2f)\n", result[i].id, result[i].name, result[i].score);
-
-                    printf("Do you need pieces of AI tailored report?(Y/N):");
-                    char wantReport;
-                    scanf(" %c", &wantReport);
-                    if (wantReport == 'Y' || wantReport == 'y')
-                        tailored_report(result, n);
->>>>>>> 424ddc55647653c56455fb5d24d70e111e671666
+                    printf("权限不足：普通用户只能查询；添加和删除操作仅对管理员开放。\n");
                 }
-                // Search Module
-                else if (req == 1)
+                else
+                    printf("操作失败!😭\n");
+            }
+
+            // Print Module
+            else if (req == 4)
+                out(total, student);
+
+            // Sort Module
+            else if (req == 5)
+            {
+                printf("请选择您的具体请求？ \n1. 按成绩排序.\n2. 按ID排序.\n");
+                printf("请输入：");
+                scanf("%d", &req);
+                if (req == 1)
+                    sortByScore(student, total, result);
+                else if (req == 2)
+                    sortById(student, total, result);
+                else
                 {
                     int ans;
 
-<<<<<<< HEAD
                     int n = 0;
-                    printf("What's your specific request?\n1. Search by ID.\n2. Search by Name.\n3. Search by Score.\n");
-                    == == == =
-                                 printf("Please type in the ID,name,score of the new student.(seperate with space)\n");
-                    printf("Input:");
-                    scanf("%s%s%lf", item.id, item.name, &item.score);
->>>>>>> 424ddc55647653c56455fb5d24d70e111e671666
-
+                    printf("请选择您的具体请求：\n1. 按ID查询.\n2. 按姓名查询.\n3. 按成绩查询.\n");
                     scanf("%d", &req);
+                    if (req == 1)
+                        ans = searchById(student, total, &n, result);
+                    else if (req == 2)
+                        ans = searchByName(student, total, &n, result);
+                    else
+                        ans = searchByScore(student, total, &n, result);
 
-                    Student student[MAX_STUDENTS];
-                    _abstract(&total, student);
-                    Student result[MAX_STUDENTS];
-
-                    if ((req == 2 || req == 3 || req == 5 || req == 6) && !canModify())
+                    if (ans == -1)
+                        printf("操作失败!😭\n");
+                    else
                     {
-                        printf("Insufficient permissions: regular users can only query; add and delete operations are available only to administrators.\n");
+                        printf("操作成功!😄\n\n");
+                        printf("查询结果如下:\n");
+                        for (int i = 0; i < n; i++)
+                            printf("(ID:%s 姓名:%s 成绩:%.2f)\n", result[i].id, result[i].name, result[i].score);
+
+                        printf("是否需要AI定制报告?(Y/N)");
+                        char wantReport;
+                        scanf(" %c", &wantReport);
+                        if (wantReport == 'Y' || wantReport == 'y')
+                            tailored_report(result, n);
                     }
-<<<<<<< HEAD
-                    // Search Module
-                    else if (req == 1)
-                        == == == =
-                                     else printf("Operation Unsuccessful!😭\n");
+                }
+                // Insert Module
+                else if (req == 2)
+                {
+                    Student item;
+
+                    printf("请输入新学生的ID、姓名和成绩(用空格分隔):\n");
+
+                    scanf("%s%s%lf", item.id, item.name, &item.score);
+
+                    insertStudent(student, &total, item);
+                }
+
+                // Delete Module
+                else if (req == 3)
+                {
+                    int ans = deleteStudent(student, &total);
+                    if (ans == 1)
+                    {
+                        printf("操作成功!😄\n");
+                        _writeIn(total, student);
+                    }
+                    else
+                        printf("操作失败!😭\n");
                 }
 
                 // Print Module
@@ -99,112 +149,39 @@ int main()
                 // Sort Module
                 else if (req == 5)
                 {
-                    printf("What's your specific request? \n1. Sort by score.\n2. Sort by ID.\n");
-                    printf("Input:");
+                    printf("请选择您的具体请求？ \n1. 按成绩排序.\n2. 按ID排序.\n");
                     scanf("%d", &req);
                     if (req == 1)
                         sortByScore(student, total, result);
                     else if (req == 2)
                         sortById(student, total, result);
                     else
->>>>>>> 424ddc55647653c56455fb5d24d70e111e671666
                     {
-                        int ans;
-
-                        int n = 0;
-                        printf("What's your specific request?\n1. Search by ID.\n2. Search by Name.\n3. Search by Score.\n");
-                        scanf("%d", &req);
-                        if (req == 1)
-                            ans = searchById(student, total, &n, result);
-                        else if (req == 2)
-                            ans = searchByName(student, total, &n, result);
-                        else
-                            ans = searchByScore(student, total, &n, result);
-
-                        if (ans == -1)
-                            printf("Operation Unsuccessful!😭\n");
-                        else
-                        {
-                            printf("Operation Successful!😄\n\n");
-                            printf("The searched content shows below:\n");
-                            for (int i = 0; i < n; i++)
-                                printf("(ID:%s Name:%s Score:%.2f)\n", result[i].id, result[i].name, result[i].score);
-
-                            printf("Do you need pieces of AI tailored report?(Y/N)");
-                            char wantReport;
-                            scanf(" %c", &wantReport);
-                            if (wantReport == 'Y' || wantReport == 'y')
-                                tailored_report(result, n);
-                        }
+                        printf("非法输入\n");
+                        continue;
                     }
-                    // Insert Module
-                    else if (req == 2)
-                    {
-                        Student item;
-
-                        printf("Please type in the ID,name,score of the new student.\n");
-
-                        scanf("%s%s%lf", item.id, item.name, &item.score);
-
-                        insertStudent(student, &total, item);
-                    }
-
-                    // Delete Module
-                    else if (req == 3)
-                    {
-                        int ans = deleteStudent(student, &total);
-                        if (ans == 1)
-                        {
-                            printf("Operation Successful!😄\n");
-                            _writeIn(total, student);
-                        }
-                        else
-                            printf("Operation Unsuccessful!😭\n");
-                    }
-
-                    // Print Module
-                    else if (req == 4)
-                        out(total, student);
-
-                    // Sort Module
-                    else if (req == 5)
-                    {
-                        printf("What's your specific request? \n1. Sort by score.\n2. Sort by ID.\n");
-                        scanf("%d", &req);
-                        if (req == 1)
-                            sortByScore(student, total, result);
-                        else if (req == 2)
-                            sortById(student, total, result);
-                        else
-                        {
-                            printf("Invalid option.\n");
-                            continue;
-                        }
-                        out(total, result);
-                    }
-
-                    // Aggregate Module
-                    else if (req == 6)
-                        aggregate(total, student);
-
-                    printf("Do you want to continue?(Y/N)");
-                    char cont;
-                    scanf(" %c", &cont);
-                    if (cont == 'N' || cont == 'n')
-                        break;
+                    out(total, result);
                 }
 
-<<<<<<< HEAD
-                printf("Goodbye!✋️");
-                return 0;
-                == == == =
-                             // Aggregate Module
-                    else if (req == 6) aggregate(total, student);
+                // Aggregate Module
+                else if (req == 6)
+                    aggregate(total, student);
 
-                printf("Do you want to continue?(Y/N):");
+                printf("是否需要继续?(Y/N)");
                 char cont;
                 scanf(" %c", &cont);
                 if (cont == 'N' || cont == 'n')
                     break;
->>>>>>> 424ddc55647653c56455fb5d24d70e111e671666
             }
+
+            // Aggregate Module
+            else if (req == 6)
+                aggregate(total, student);
+
+            printf("是否需要继续?(Y/N):");
+            char cont;
+            scanf(" %c", &cont);
+            if (cont == 'N' || cont == 'n')
+                break;
+        }
+    }

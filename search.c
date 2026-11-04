@@ -23,7 +23,7 @@ int searchById(Student stu[], int total, int *n, Student result[])
         }
     }
 
-    printf("Please enter the student ID you want to query: ");
+    printf("请输入要查询的学生ID: ");
     scanf("%19s", key);
 
     while (low <= high)
@@ -50,7 +50,7 @@ int searchById(Student stu[], int total, int *n, Student result[])
 
     *n = 0;
 
-    printf("No such person found! Student ID %s does not exist.\n", key);
+    printf("找不到要查询的对象！ %s 不存在。\n", key);
     return -1;
 }
 
@@ -59,7 +59,7 @@ int searchByName(Student stu[], int total, int *n, Student result[])
     char key[NAME_LENGTH];
     int i, count = 0;
 
-    printf("Please enter the student NAME you want to query: ");
+    printf("请输入要查询的学生姓名: ");
     scanf("%19s", key);
 
     for (i = 0; i < total && count < MAX_RESULT; i++)
@@ -73,7 +73,7 @@ int searchByName(Student stu[], int total, int *n, Student result[])
 
     if (count == 0)
     {
-        printf("No such person found! Student Name %s does not exist.\n", key);
+        printf("没有找到该学生! 学生姓名 %s 不存在。\n", key);
         return -1;
     }
 
@@ -86,14 +86,14 @@ int searchByScore(Student stu[], int total, int *n, Student result[])
     double m;
     int i, count = 0;
 
-    printf("Please enter the upper score limit m :");
+    printf("请输入成绩上限 m :");
     scanf("%lf", &m);
 
     for (i = 0; i < total && count < MAX_RESULT; i++)
     {
         if (stu[i].score < m)
         {
-            result[count] = stu[i]; 
+            result[count] = stu[i];
 
             count++;
         }
@@ -101,7 +101,7 @@ int searchByScore(Student stu[], int total, int *n, Student result[])
 
     if (count == 0)
     {
-        printf("No students have a score lower than %.2f.\n", m);
+        printf("没有学生分数低于 %.2f。\n", m);
         return -1;
     }
     *n = count;
