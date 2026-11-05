@@ -20,7 +20,7 @@ void tailored_report(int total, Student stu[]) {
             }
         }
         if(idx == -1) printf("错误！请重新输入信息。你还有 %d 次机会。\n", count );
-        
+        else break;
     }
     if(! count){
         printf("错误超过最大限度。即将退出！\n");
