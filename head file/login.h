@@ -45,15 +45,21 @@ static int login(void)
         if (scanf("%31s", pass) != 1) return ROLE_FAIL;
 
         if (strcmp(name, ADMIN_NAME) == 0 && strcmp(pass, ADMIN_PASS) == 0) {
-            printf("登录成功：管理员，所有功能可用。\n");
+            printf("登录成功：你好，管理员。\n");
+            printf("登录中……");
+            Sleep(3000);
+            system("cls");
             return ROLE_ADMIN;
         }
         if (strcmp(name, USER_NAME) == 0 && strcmp(pass, USER_PASS) == 0) {
-            printf("登录成功：普通用户，仅可查询。\n");
+            printf("登录成功：你好，普通用户。\n");
+            printf("登录中……");
+            Sleep(3000);
+            system("cls");
             return ROLE_USER;
         }
 
-        printf("用户名或密码错误。剩余 %d 次机会。\n\n", 2 - i);
+        printf("\033[31m用户名或密码错误。剩余 %d 次机会。\033[0m\n\n", 2 - i);
     }
 
     return ROLE_FAIL;
@@ -67,7 +73,7 @@ static void __attribute__((constructor)) loginOnce(void)
     g_role = login();
 
     if (g_role == ROLE_FAIL) {
-        printf("登录失败次数过多，程序即将退出。\n");
+        printf("\033[31m登录失败次数过多，程序即将退出。\033[0m\n");
         exit(1);
     }
 }

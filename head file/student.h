@@ -2,6 +2,10 @@
 #define STUDENT_H
 #include "template.h"
 
+
+// menu 界面控制
+void askClear(int *bol, char choice);
+
 // Search Module
 int searchById(Student stu[],int total, int *n,Student result[]);
 

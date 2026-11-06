@@ -38,8 +38,8 @@ void _writeIn(int total, Student *result)
     int closed = fclose(ptr);
     if (written != (size_t)total || closed != 0)
     {
-        printf("写入文件失败。\n");
+        printf("\033[31m写入文件失败。\033[0m\n");
         exit(1);
     }
-    printf("写入成功！😄\n");
+    
 }

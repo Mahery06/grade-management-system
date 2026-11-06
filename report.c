@@ -19,11 +19,11 @@ void tailored_report(int total, Student stu[]) {
                 break;
             }
         }
-        if(idx == -1) printf("错误！请重新输入信息。你还有 %d 次机会。\n", count );
+        if(idx == -1) printf("\033[31m错误！请重新输入信息。你还有 %d 次机会。\033[0m\n", count );
         else break;
     }
     if(! count){
-        printf("错误超过最大限度。即将退出！\n");
+        printf("\033[31m错误超过最大限度。即将退出！\033[0m\n");
         return;
     }
     
@@ -41,7 +41,7 @@ void tailored_report(int total, Student stu[]) {
     else if(stu[idx].score>=80 && stu[idx].score<85) strcat(path, "80-85.txt");
     else if(stu[idx].score>=85 && stu[idx].score<90) strcat(path, "85-90.txt");
     else if(stu[idx].score>=90 && stu[idx].score<95) strcat(path, "90-95.txt");
-    else if(stu[idx].score>=95 && stu[idx].score<100) strcat(path, "95-100.txt");
+    else strcat(path, "95-100.txt");   
   
 
         
@@ -51,5 +51,6 @@ void tailored_report(int total, Student stu[]) {
     fread(cont,1, 1000, ptr);
     fclose(ptr);
     printf("%s 同学,你的学业规划报告如下：\n",name);
-    printf("%s\n", cont);
+    printf("%s", cont);
+    
 }

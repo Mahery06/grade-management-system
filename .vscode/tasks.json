@@ -12,6 +12,7 @@
                 "-g",
                 "${workspaceFolder}\\menu.c",
                 "${workspaceFolder}\\search.c",
+                "${workspaceFolder}\\clear.c",
                 "${workspaceFolder}\\insert.c",
                 "${workspaceFolder}\\delete.c",
                 "${workspaceFolder}\\sort.c",
