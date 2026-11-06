@@ -1,5 +1,5 @@
 #include<stdio.h>
-
+#include<windows.h>
 void askClear(int *bol, char choice){
     
     if (choice == 'Y' || choice == 'y') 

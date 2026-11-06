@@ -1,0 +1,22 @@
+ 0  B22060890    ghkh         45.56
+ 1  B22090121    GaoYun       94.0
+ 2  B25090001    ZhangSan     100.0
+ 3  B25090002    LiSi         92.0
+ 4  B25090003    WangWu       78.0
+ 5  B25090004    ZhaoLiu      63.0
+ 6  B25090005    ChenYi       98.0
+ 7  B25090006    LinEr        70.5
+ 8  B25090007    SunQi        88.0
+ 9  B25090008    ZhouBa       55.0
+10  B25090009    WuJiu        90.0
+11  B25090010    ZhengShi     82.0
+12  B25090011    FengYi       76.0
+13  B25090012    ChuEr        61.0
+14  B25090013    WeiSan       95.5
+15  B25090014    JiangSi      84.0
+16  B25090015    ShenWu       69.0
+17  B25090016    HanLiu       91.0
+18  B25090017    YangQi       73.5
+19  B25090018    ZhuBa        80.0
+20  B25090019    QinJiu       89.5
+21  B25090020    YouShi       67.0

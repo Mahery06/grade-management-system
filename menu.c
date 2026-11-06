@@ -114,7 +114,7 @@ int main()
                     printf("\033[31m删除失败~\033[0m\n\n");
                 }
 
-            printf("需要继续进行修改操作吗？\n请输入(Y/N): ");
+            printf("需要继续进行删除操作吗？\n请输入(Y/N): ");
             char choice;
             scanf(" %c", &choice);
             askClear(&bol, choice);
@@ -149,7 +149,7 @@ int main()
                 if (choice == 1 || choice == 2)
                     out(total, result);
             
-            printf("需要继续进行修改操作吗？\n请输入(Y/N): ");
+            printf("需要继续进行排序操作吗？\n请输入(Y/N): ");
             char c;
             scanf(" %c", &c);
             askClear(&bol, c);       

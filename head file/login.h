@@ -24,10 +24,7 @@ __attribute__((unused)) static const char *roleName(int role)
     return "未登录";
 }
 
-static int canModify(void)
-{
-    return g_role == ROLE_ADMIN;
-}
+
 
 static int login(void)
 {
