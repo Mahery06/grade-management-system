@@ -22,7 +22,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "head file/student.h"
+#include "student.h"
 
 #define SEARCH_MAX_CONDITIONS 3
 
@@ -32,7 +32,6 @@
 
 /*
  * 查询字段编号（0/1/2）。
- * 这里按你的要求使用宏定义；换成 enum 也完全等价。
  */
 #define FIELD_ID    0
 #define FIELD_NAME  1
@@ -51,7 +50,7 @@ typedef struct
     double high;               /* 分数区间上限（包含）           */
 } Condition;
 
-typedef struct
+typedef struct      /*为二分查找做准备，不能保证 原数组是按学号有序排列*/
 {
     const Student *student;
     int index;
@@ -121,7 +120,7 @@ static int readText(char *buffer, int size, const char *prompt)
 
     for (;;)
     {
-        printf("%s", prompt);
+        printf("%s", prompt);  /*请输入学号（姓名）*/
 
         result = readLine(buffer, size);
         if (result == 1)
@@ -151,7 +150,7 @@ static int readInt(int *value)
     if (readLine(line, (int)sizeof line) != 1)
         return 0;
 
-    parsed = strtol(line, &end, 10);
+    parsed = strtol(line, &end, 10);/*字符串转换成二进制数*/
     while (*end == ' ' || *end == '\t')
         end++;
 
@@ -181,7 +180,7 @@ static int readScore(double *value)
             continue;
         }
 
-        parsed = strtod(line, &end);
+        parsed = strtod(line, &end);/*字符串转换成浮点数*/
         while (*end == ' ' || *end == '\t')
             end++;
 
@@ -267,7 +266,7 @@ static int askField(int usedMask, int ordinal)
 /* 读取一个条件的取值。遇到 EOF 返回 0。 */
 static int readCondition(Condition *condition, int field)
 {
-    memset(condition, 0, sizeof *condition);
+    memset(condition, 0, sizeof *condition);  /*系统自带的函数，用于初始化结构体，防止之前残留的数据影响*/
     condition->field = field;
 
     if (field == FIELD_ID)
@@ -386,7 +385,7 @@ static int matchAll(const Student *student, const Condition conditions[], int co
     return 1;
 }
 
-static int compareIdEntry(const void *left, const void *right)
+static int compareIdEntry(const void *left, const void *right)/*与下面qsort函数配合使用*/
 {
     const IdEntry *a = (const IdEntry *)left;
     const IdEntry *b = (const IdEntry *)right;
@@ -395,7 +394,7 @@ static int compareIdEntry(const void *left, const void *right)
 }
 
 /* 返回第一个学号 >= id 的位置。 */
-static int lowerBoundById(const IdEntry entries[], int total, const char *id)
+static int lowerBoundById(const IdEntry entries[], int total, const char *id)    /*二分查找*/
 {
     int low = 0;
     int high = total;
@@ -444,7 +443,7 @@ static int runQuery(const Student students[], int total,
             entries[i].index = i;
         }
 
-        qsort(entries, (size_t)total, sizeof entries[0], compareIdEntry);
+        qsort(entries, (size_t)total, sizeof entries[0], compareIdEntry);/*系统自带的排序函数，与上面的compareIdEntry函数配合使用*/
 
         pos = lowerBoundById(entries, total,
                              idCond->isRange ? idCond->idLow : idCond->id);
@@ -525,7 +524,7 @@ int searchById(Student stu[], int total, int *n, Student result[])
     return found;
 }
 
-/* ------------------------------------------------------------------ */
+/* ----------------------------------------------------------------- */
 /* 界面层：menu.c 使用的多条件查询                                      */
 /* ------------------------------------------------------------------ */
 
@@ -555,15 +554,14 @@ void searchMenu(int total, Student stu[])
     printf("\n========== 查询 ==========\n");
 
     field = askField(usedMask, 1);
-    if (field < 0)
+    if (field < 0)      /*退出查询*/
         return;
 
-    if (!readCondition(&conditions[0], field))
+    if (!readCondition(&conditions[0], field))    /*读取失败*/
         return;
 
-    usedMask |= 1 << field;
-    conditionCount = 1;
-
+    usedMask |= 1 << field;     /*标记已使用的字段*/
+    conditionCount = 1;       /*已输入的条件数*/
     while (conditionCount < SEARCH_MAX_CONDITIONS)
     {
         int more = askYesNo("是否输入其他信息？(Y/N)：");
@@ -574,13 +572,13 @@ void searchMenu(int total, Student stu[])
             break;
 
         field = askField(usedMask, conditionCount + 1);
-        if (field < 0)
+        if (field < 0)         /*退出查询*/
             return;
 
-        if (!readCondition(&conditions[conditionCount], field))
+        if (!readCondition(&conditions[conditionCount], field))    /*读取失败*/
             return;
 
-        usedMask |= 1 << field;
+        usedMask |= 1 << field;  /*标记已使用的字段，防止重复使用*/
         conditionCount++;
     }
 
