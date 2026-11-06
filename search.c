@@ -50,6 +50,7 @@ typedef struct
     double high;               /* 分数区间上限（包含）           */
 } Condition;
 
+
 typedef struct      /*为二分查找做准备，不能保证 原数组是按学号有序排列*/
 {
     const Student *student;
@@ -227,7 +228,7 @@ static int askYesNo(const char *prompt)
 /* ------------------------------------------------------------------ */
 
 /* 返回字段下标，遇到 EOF 返回 -1。 */
-static int askField(int usedMask, int ordinal)
+static int askField(int *usedMasks, int ordinal)
 {
     int choice;
 
@@ -253,7 +254,7 @@ static int askField(int usedMask, int ordinal)
             continue;
         }
 
-        if (usedMask & (1 << (choice - 1)))
+        if (usedMasks[choice - 1])
         {
             printf("该信息已经使用过，请选择其他信息。\n");
             continue;
@@ -530,11 +531,11 @@ int searchById(Student stu[], int total, int *n, Student result[])
 
 void searchMenu(int total, Student stu[])
 {
+    int usedMasks[3]={0,0,0};
     Condition conditions[SEARCH_MAX_CONDITIONS];
     int matched[MAX_STUDENTS];
     Student result[MAX_STUDENTS];
     int conditionCount = 0;
-    int usedMask = 0;
     int field;
     int count;
     int i;
@@ -553,14 +554,14 @@ void searchMenu(int total, Student stu[])
 
     printf("\n========== 查询 ==========\n");
 
-    field = askField(usedMask, 1);
+    field = askField(usedMasks, 1);
     if (field < 0)      /*退出查询*/
         return;
 
     if (!readCondition(&conditions[0], field))    /*读取失败*/
         return;
 
-    usedMask |= 1 << field;     /*标记已使用的字段*/
+    usedMasks[field] = 1;  /*标记已使用的字段，防止重复使用*/
     conditionCount = 1;       /*已输入的条件数*/
     while (conditionCount < SEARCH_MAX_CONDITIONS)
     {
@@ -571,19 +572,22 @@ void searchMenu(int total, Student stu[])
         if (!more)
             break;
 
-        field = askField(usedMask, conditionCount + 1);
+        field = askField(usedMasks, conditionCount + 1);
         if (field < 0)         /*退出查询*/
             return;
 
         if (!readCondition(&conditions[conditionCount], field))    /*读取失败*/
             return;
 
-        usedMask |= 1 << field;  /*标记已使用的字段，防止重复使用*/
+        usedMasks[field] = 1;  /*标记已使用的字段，防止重复使用*/
         conditionCount++;
     }
 
     count = runQuery(stu, total, conditions, conditionCount, matched, MAX_STUDENTS);
 
+    /* runQuery(const Student students[], int total,
+                    const Condition conditions[], int conditionCount,
+                    int matched[], int capacity)*/
     if (count == 0)
     {
         printf("未找到符合条件的学生！\n");
